@@ -1,0 +1,11 @@
+{
+    "if": {
+      "not": {
+        "field": "tags",
+        "exists": true
+      }
+    },
+    "then": {
+      "effect": "deny"
+    }
+}

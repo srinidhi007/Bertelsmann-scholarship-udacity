@@ -1,0 +1,39 @@
+{
+    "variables": {
+      "client_id": "7254a09f-7c1d-46bb-97d7-855e524ca1d8",
+      "client_secret": "VBU8Q~n~WdjfeAUnIOVbtiXW36LGIi6sE2eGGb56",
+      "tenant_id": "5f973f3c-ca76-4078-a3d2-075229a32084",
+      "subscription_id": "0eb45ed3-1797-4765-b446-7a8a5aa37cb9"
+    },
+    "builders": [{
+      "type": "azure-arm",
+   
+      "client_id": "{{user `client_id`}}",
+      "client_secret": "{{user `client_secret`}}",
+      "tenant_id": "{{user `tenant_id`}}",
+      "subscription_id": "{{user `subscription_id`}}",
+   
+      "os_type": "Linux",
+      "image_publisher": "Canonical",
+      "image_offer": "UbuntuServer",
+      "image_sku": "18.04-LTS",
+   
+      "managed_image_resource_group_name": "firstproject-resources",
+      "managed_image_name": "myPackerImage",
+   
+      "location": "West Europe",
+      "vm_size": "Standard_D2s_v3"
+    }],
+    "provisioners": [{
+      "inline": [
+          "apt-get update",
+          "apt-get upgrade -y",
+          "apt-get -y install nginx",
+          "echo 'Hello, world!' > index.html",
+          "nohup busybox httpd -f -p 80 &"
+      ],
+      "inline_shebang": "/bin/sh -x",
+      "type": "shell",
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'"
+    }]
+  }
