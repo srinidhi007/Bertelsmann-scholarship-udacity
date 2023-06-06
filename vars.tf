@@ -55,5 +55,5 @@ variable "tags_for_policy" {
 variable "subscription"{
 description = "Subscription ID"
 type  = string
-default = "0eb45ed3-1797-4765-b446-7a8a5aa37cb9"
+default = "xxxx-xxxx-xxxx-xxx"
 }
